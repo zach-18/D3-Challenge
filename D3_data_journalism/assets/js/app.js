@@ -12,8 +12,10 @@ d3.csv("./data.csv").then(function(censusData) {
     // Cast each hours value in tvData as a number using the unary + operator
     censusData.forEach(function(data) {
       data.poverty = +data.poverty;
+      data.healthcare = +data.healthcare;
       console.log("state:", data.state);
       console.log("Poverty:", data.poverty);
+      console.log("Lack Healthcare:", data.healthcare);
     });
   }).catch(function(error) {
     console.log(error);
