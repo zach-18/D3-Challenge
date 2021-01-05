@@ -86,12 +86,12 @@ d3.csv("./data.csv").then(function(censusData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Number of Billboard 100 Hits");
+      .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
+      .text("In Poverty (%)");
     
 
 
