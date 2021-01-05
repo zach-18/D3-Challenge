@@ -22,8 +22,6 @@ var svg = d3.select(".scatter")
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-
-
 /** From 16.2 Ins_Loading_Data */
 // Load data from data.csv
 d3.csv("./data.csv").then(function(censusData) {
@@ -33,12 +31,15 @@ d3.csv("./data.csv").then(function(censusData) {
         // log a list of names
         var state = censusData.map(data => data.state);
         console.log("state", state);
+
+        var abbr = censusData.map(data => data.abbr);
+        console.log("abbr", abbr);
     
         // Cast each value censusData as a number using the unary + operator
         censusData.forEach(function(data) {
             data.poverty = parseInt(data.poverty);
             data.healthcare = +parseInt(data.healthcare);
-            console.log("state:", data.state);
+            console.log("state:", data.state, data.abbr);
             console.log("Poverty:", data.poverty);
             console.log("Lack Healthcare:", data.healthcare);
         });
@@ -75,9 +76,10 @@ d3.csv("./data.csv").then(function(censusData) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "15")
-        .attr("fill", "pink")
-        .attr("opacity", ".5");
+        .attr("r", "10")
+        .attr("fill", "lightblue")
+        .attr("opacity", ".5")
+        .text(d => d.abbr);
 
         // Create axes labels
         chartGroup.append("text")
