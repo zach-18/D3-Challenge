@@ -96,6 +96,15 @@ d3.csv("./data.csv").then(function(censusData) {
         .text("In Poverty (%)");
         
 
+        // /*WIP, not working yet.  From https://gramener.github.io/d3js-playbook/scatter.html
+        // * This is for the labels of the circles
+        svg.selectAll("text")
+            .censusData(censusData).enter()
+            .append("text")
+            .attr("x", function(d) {return d.poverty+10})
+            .attr("y", function(d) {return d.healthcare+4})
+            .text(function(d) {return d.abbr})
+            .attr("font-size", "100px");
 
     }).catch(function(error) {
         console.log(error);
