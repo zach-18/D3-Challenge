@@ -43,7 +43,7 @@ d3.csv("./data.csv").then(function(censusData) {
             console.log("Poverty:", data.poverty);
             console.log("Lack Healthcare:", data.healthcare);
         });
-
+        // 16.3.9 (Stu_Hair_Metal) was source code for building scatter plot**
         // Step 2: Create scale functions
         // ==============================
         var xLinearScale = d3.scaleLinear()
@@ -77,7 +77,7 @@ d3.csv("./data.csv").then(function(censusData) {
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
         .attr("r", "10")
-        .attr("fill", "lightblue")
+        .attr("fill", "deepskyblue")
         .attr("opacity", ".5")
         .text(d => d.abbr);
 
@@ -95,16 +95,48 @@ d3.csv("./data.csv").then(function(censusData) {
         .attr("class", "axisText")
         .text("In Poverty (%)");
         
-
-        // /*WIP, not working yet.  From https://gramener.github.io/d3js-playbook/scatter.html
-        // * This is for the labels of the circles
-        svg.selectAll("text")
-            .censusData(censusData).enter()
+        // // /*WIP, not working yet.  From https://gramener.github.io/d3js-playbook/scatter.html
+        // // * This is for the labels of the circles
+        var circlesGroup = chartGroup.selectAll("text")
+        // svg.selectAll("text")
+            .data(censusData).enter()
             .append("text")
-            .attr("x", function(d) {return d.poverty+10})
-            .attr("y", function(d) {return d.healthcare+4})
+            .classed('circleText', true)
+            // .attr("dx", function(d) {return d.poverty})
+            // .attr("dy", function(d) {return d.healthcare})
+
+            .attr("dx", function (d) {
+            // console.log(d.poverty);
+            return xLinearScale(d.poverty);
+            })
+            .attr("dy", function (d) {
+            // console.log(d.healthcare);
+            return yLinearScale(d.healthcare) + 6;
+            })
+
             .text(function(d) {return d.abbr})
-            .attr("font-size", "100px");
+            .attr("font-size", "12px")
+
+
+        //* code from Mo:**
+        // circlesGroup
+        //     .append("text")
+        //     .classed("stateText", true)
+        //     .attr("dx", function (d) {
+        //     console.log(d.poverty);
+        //     return xLinearScale(d.poverty);
+        //     })
+        //     .attr("dy", function (d) {
+        //     console.log(d.healthcare);
+        //     return yLinearScale(d.healthcare) + 6;
+        //     })
+        //     .text(function (d) {
+        //         return d.abbr;
+        //     })
+        //     .attr("text-size", 15);
+
+
+
 
     }).catch(function(error) {
         console.log(error);
